@@ -1,0 +1,100 @@
+.lx-tooltip {
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 12px;
+  line-height: 1.5715;
+  list-style: none;
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  width: max-content;
+  max-width: 250px;
+  transition: opacity 0.1s linear;
+}
+.lx-tooltip-inner {
+  max-width: 30px;
+  padding: 6px 8px;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  word-wrap: break-word;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+}
+.lx-tooltip-inner div {
+  text-align: center;
+}
+.lx-tooltip-arrow {
+  position: absolute;
+  display: block;
+  width: 13.07106781px;
+  height: 13.07106781px;
+  overflow: hidden;
+  background: transparent;
+  pointer-events: none;
+}
+.lx-tooltip-arrow-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  content: "";
+  pointer-events: auto;
+}
+.lx-tooltip-placement-bottom {
+  padding-top: 8px;
+}
+.lx-tooltip-placement-bottom .lx-tooltip-arrow {
+  top: -4.7106781px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.lx-tooltip-placement-bottom .lx-tooltip-arrow-content {
+  box-shadow: -3px -3px 7px rgba(0, 0, 0, 0.07);
+  transform: translateY(6.53553391px) rotate(45deg);
+}
+.lx-tooltip-placement-top {
+  padding-bottom: 8px;
+}
+.lx-tooltip-placement-top .lx-tooltip-arrow {
+  bottom: -5.07106781px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.lx-tooltip-placement-top .lx-tooltip-arrow-content {
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
+  transform: translateY(-6.53553391px) rotate(45deg);
+}
+.lx-tooltip-placement-right {
+  padding-left: 8px;
+}
+.lx-tooltip-placement-right .lx-tooltip-arrow {
+  left: -5.07106781px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lx-tooltip-placement-right .lx-tooltip-arrow-content {
+  box-shadow: -3px 3px 7px rgba(0, 0, 0, 0.07);
+  transform: translateX(6.53535339px) rotate(45deg);
+}
+.lx-tooltip-placement-left {
+  padding-right: 8px;
+}
+.lx-tooltip-placement-left .lx-tooltip-arrow {
+  right: -5.07106781px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lx-tooltip-placement-left .lx-tooltip-arrow-content {
+  box-shadow: 3px -3px 7px rgba(0, 0, 0, 0.07);
+  transform: translateX(-6.53535339px) rotate(45deg);
+}

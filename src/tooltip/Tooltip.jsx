@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Overlay from './Overlay'
-import {isEqual} from './utils'
+import isEqual from './utils'
 
 export default class Tooltip extends React.Component{
   static defaultProps = {
@@ -19,7 +19,6 @@ export default class Tooltip extends React.Component{
     overlayClassName: PropTypes.string,
     title:PropTypes.string,
     placement: PropTypes.string,
-    visible: PropTypes.bool,
     children: PropTypes.element,
     getPopupContainer: PropTypes.func,
     trigger: PropTypes.oneOfType([
@@ -74,7 +73,7 @@ export default class Tooltip extends React.Component{
 
   getTriggerProps = () => {
     const trigger  = this.props.trigger
-    let triggerProps
+    let triggerProps = {}
     
     if(this.getRef().current) {
       if(trigger.indexOf('hover') !== -1){
@@ -152,8 +151,8 @@ export default class Tooltip extends React.Component{
         return {
           ...this.state.overlayStyle,
           left: triggerRect.left,
-          top : triggerRect.top - triggerRect.height / 2,
-          transform: 'translateY(-50%)',
+          top : triggerRect.top + triggerRect.height / 2,
+          transform: 'translate(-100%,-50%)',
         }
       case 'right' :
         return {

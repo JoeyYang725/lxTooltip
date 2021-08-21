@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Tooltip from './tooltip'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         >
           Learn React
         </a>
+        <Tooltip title='123' placement='left'>
+          <button style={{margin:'50px auto'}}>fdsafads</button>
+        </Tooltip>
       </header>
     </div>
   );

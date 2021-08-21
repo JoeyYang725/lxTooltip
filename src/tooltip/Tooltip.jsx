@@ -80,7 +80,7 @@ export default class Tooltip extends React.Component{
         triggerProps = Object.assign(triggerProps, {
           onMouseEnter: this.handleMouseEnter,
           onMouseLeave: this.handleMouseLeave,
-          onClick: this.handleClick,
+          onClick: this.close,
         })
       }
       if(trigger.indexOf('click') !== -1){

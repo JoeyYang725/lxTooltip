@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Overlay from './Overlay'
-import {isEqual, assert} from './utils'
+import {isEqual} from './utils'
 
 export default class Tooltip extends React.Component{
   static defaultProps = {
@@ -26,6 +26,15 @@ export default class Tooltip extends React.Component{
       PropTypes.string,
       PropTypes.array,
     ])
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+      triggerRect: {},
+      exist: false,
+      overlayStyle: {},
+    }
   }
 
   triggerRef = React.createRef()
@@ -89,5 +98,121 @@ export default class Tooltip extends React.Component{
         })
       }
     }
+    return triggerProps
   }
+
+  open = () => {
+    this.setState(preState => {
+      if(!isEqual(preState.triggerRect,this.getTriggerRect())) {
+        return {
+          triggerRect: this.getTriggerRect(),
+          exist: true,
+          overlayStyle: { ...this.setOverlayStyle(this.getTriggerRect()), opacity:1}
+        }
+      }
+      return { overlayStyle: {...this.setOverlayStyle(preState.triggerRect),opacity:1 } }
+    })
+  }
+
+  close = () => {
+    this.setState(preState => {
+      return {
+        exist: !this.props.destroyTooltipOnHide,
+        overlayStyle: {...this.setOverlayStyle(preState.triggerRect),opacity:0 } 
+
+      }
+    })
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      triggerRect: this.getTriggerRect()
+    })
+  }
+
+  handleMouseEnter = () => {
+    this.open()
+  }
+
+  handleMouseLeave = () => {
+    this.close()
+  }
+
+  setOverlayStyle = triggerRect => {
+    const { placement } = this.props
+    switch (placement) {
+      case 'top' :
+        return {
+          ...this.state.overlayStyle,
+          left: triggerRect.left + triggerRect.width / 2,
+          top : triggerRect.top - triggerRect.height - 10,
+          transform: 'translateX(-50%)',
+        }
+      case 'left' :
+        return {
+          ...this.state.overlayStyle,
+          left: triggerRect.left,
+          top : triggerRect.top - triggerRect.height / 2,
+          transform: 'translateY(-50%)',
+        }
+      case 'right' :
+        return {
+          ...this.state.overlayStyle,
+          left: triggerRect.left + triggerRect.width,
+          top : triggerRect.top + triggerRect.height / 2,
+          transform: 'translateY(-50%)',
+        }
+      default :
+        return {
+          ...this.state.overlayStyle,
+          left: triggerRect.left + triggerRect.width / 2,
+          top : triggerRect.top + triggerRect.height,
+          transform: 'translateX(-50%)',
+        }
+    }
+  }
+
+  getTriggerRect = () => {
+    if(this.getRef().current) {
+      return ReactDOM.findDOMNode(this.getRef().current).getBoundingClientRect()
+    }
+  }
+
+  getRef = () => {
+    if(this.props.children.ref) {
+      return this.props.children.ref
+    }
+    return this.triggerRef
+  }
+
+  render() {
+    const {title, children, getPopupContainer, overlayClassName } = this.props
+    const triggerProps = this.getTriggerProps()
+    return React.cloneElement(children, {ref: this.getRef(), ...triggerProps},
+    [
+      children.props.children,
+      <Overlay
+        exist={this.state.exist}
+        key={title}
+        placement={this.props.placement}
+        title={title}
+        overlayStyle={this.state.overlayStyle}
+        getPopupContainer={getPopupContainer}
+        overlayClassName={overlayClassName}
+      >
+      </Overlay>,
+      ]
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

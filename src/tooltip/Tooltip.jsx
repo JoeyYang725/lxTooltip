@@ -39,4 +39,29 @@ export default class Tooltip extends React.Component{
     this.open()
   }
 
+  handleMouseLeave = e => {
+    this.getChildProps().onMouseLeave?.(e)
+    this.close()
+  }
+
+  handleClick = e => {
+    this.getChildProps().onClick?.(e)
+    if(this.state.overlayStyle.opacity ===1){
+      this.close()
+    }else{
+      this.open()
+    } 
+  }
+
+  handleFocus = e => {
+    this.getChildProps().onFocus?.(e)
+    this.open()
+  }
+
+  handleBlur = e => {
+    this.getChildProps().onBlur?.(e)
+    this.close()
+  }
+
+
 }

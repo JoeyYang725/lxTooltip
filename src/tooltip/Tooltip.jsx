@@ -63,5 +63,31 @@ export default class Tooltip extends React.Component{
     this.close()
   }
 
-
+  getTriggerProps = () => {
+    const trigger  = this.props.trigger
+    let triggerProps
+    
+    if(this.getRef().current) {
+      if(trigger.indexOf('hover') !== -1){
+        triggerProps = Object.assign(triggerProps, {
+          onMouseEnter: this.handleMouseEnter,
+          onMouseLeave: this.handleMouseLeave,
+          onClick: this.handleClick,
+        })
+      }
+      if(trigger.indexOf('click') !== -1){
+        triggerProps = Object.assign(triggerProps, {
+          onMouseLeave: this.handleMouseLeave,
+          onClick: this.handleClick,
+          onBlur: this.handleBlur,
+        })
+      }
+      if(trigger.indexOf('focus') !== -1){
+        triggerProps = Object.assign(triggerProps, {
+          onFocus: this.handleFocus,
+          onBlur:this.handleBlur,
+        })
+      }
+    }
+  }
 }

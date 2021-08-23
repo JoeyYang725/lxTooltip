@@ -18,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-        <Tooltip title='123' placement='left' trigger='hover' destroyTooltipOnHide={true}>
+        <Tooltip title='123' placement='left' trigger='click' destroyTooltipOnHide={true}>
           <button style={{margin:'50px auto'}}>fdsafads</button>
         </Tooltip>
       </header>

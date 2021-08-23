@@ -109,7 +109,7 @@ export default class Tooltip extends React.Component{
           overlayStyle: { ...this.setOverlayStyle(this.getTriggerRect()), opacity:1}
         }
       }
-      return { overlayStyle: {...this.setOverlayStyle(preState.triggerRect),opacity:1 } }
+      return { exist: true, overlayStyle: {...this.setOverlayStyle(preState.triggerRect),opacity:1 } }
     })
   }
 
@@ -127,14 +127,6 @@ export default class Tooltip extends React.Component{
     this.setState({
       triggerRect: this.getTriggerRect()
     })
-  }
-
-  handleMouseEnter = () => {
-    this.open()
-  }
-
-  handleMouseLeave = () => {
-    this.close()
   }
 
   setOverlayStyle = triggerRect => {

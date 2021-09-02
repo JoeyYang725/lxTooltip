@@ -43,38 +43,40 @@ export default class Tooltip extends React.Component{
   }
 
   handleMouseEnter = e => {
+    this.open()
     this.getChildProps().onMouseEnter?.(e)
-    this.open(e)
   }
 
   handleMouseLeave = e => {
-    this.getChildProps().onMouseLeave?.(e)
     this.close()
+    this.getChildProps().onMouseLeave?.(e)
   }
 
   handleClick = e => {
-    this.getChildProps().onClick?.(e)
     if(this.state.overlayStyle.opacity ===1){
       this.close()
+      console.log(2+2);
     }else{
-      this.open(e)
+      this.open()
+      console.log(1+1);
     } 
+    this.getChildProps().onClick?.(e)
+
   }
 
   handleFocus = e => {
+    this.open()
     this.getChildProps().onFocus?.(e)
-    this.open(e)
   }
 
   handleBlur = e => {
-    this.getChildProps().onBlur?.(e)
     this.close()
+    this.getChildProps().onBlur?.(e)
   }
 
   getTriggerProps = () => {
     const trigger  = this.props.trigger
     let triggerProps = {}
-    
     if(this.getRef().current) {
       if(trigger.indexOf('hover') !== -1){
         triggerProps = Object.assign(triggerProps, {
@@ -98,12 +100,8 @@ export default class Tooltip extends React.Component{
     return triggerProps
   }
 
-  stopPropagation(e){
-    e.nativeEvent.stopImmediatePropagation()
-  }
 
-  open = (e) => {
-    this.stopPropagation(e)
+  open = () => {
     this.setState(preState => {
       if(!isEqual(preState.triggerRect,this.getTriggerRect())) {
         return {
@@ -130,7 +128,7 @@ export default class Tooltip extends React.Component{
     this.setState({
       triggerRect: this.getTriggerRect()
     })
-    document.addEventListener('click',this.close)
+    document.addEventListener('click',this.close,true)
   }
 
   setOverlayStyle = triggerRect => {

@@ -18,9 +18,17 @@ function App() {
         >
           Learn React
         </a>
-        <Tooltip title='123' placement='left' trigger='click' destroyTooltipOnHide={true}>
-          <button style={{margin:'50px auto'}}>fdsafads</button>
+        <div className='wrapper'>
+        <Tooltip title='123' trigger={['hover','click']} destroyTooltipOnHide={true}>
+          <button >fdsafads</button>
+         </Tooltip>
+         <Tooltip title='123' trigger={['hover','click']} destroyTooltipOnHide={true}>
+          <button>fdsafads</button>
         </Tooltip>
+        <Tooltip title='123' trigger='click' destroyTooltipOnHide={true}>
+          <button>fdsafads</button>
+        </Tooltip>
+        </div>
       </header>
     </div>
   );
